@@ -170,6 +170,11 @@ public class Geohash {
 	public static Map<String, String> BORDERS = new HashMap<String, String>();
 	public static Map<String, String> NEIGHBORS = new HashMap<String, String>();
 	
+	/**
+	 * NEIGHBORS:按照GeoHash编码长度是奇数还是偶数，分别存储其在上下左右四个方向的临节点
+	 * BORDERS：按照GeoHash编码长度是奇数还是偶数，分别存储每个方向上的边缘节点。
+	 * 如果待求GeoHash编码最后一个字符所定位到的格子属于待求方向的边缘，则需要更改GeoHash编码前一位的值（确定base的过程）。
+	 */
 	public static void setMap() {
 		NEIGHBORS.put("right:even", "bc01fg45238967deuvhjyznpkmstqrwx");
 		NEIGHBORS.put("left:even", "238967debc01fg45kmstqrwxuvhjyznp");
@@ -247,7 +252,7 @@ public class Geohash {
 		}
 		base = base + BASE32.toCharArray()[(NEIGHBORS.get(dir+":"+type).indexOf(lastChr))];
 		return base;
-	} 
+	}
 	
 	@Deprecated
 	public static void expandLngLat(String geohash, int len){
@@ -326,17 +331,18 @@ public class Geohash {
 		new Geohash();
 		
 		/*获取的geohash多少位，位数越长，精度越准*/
-		int geohashLen = 6;
+		/*int geohashLen =9;
 		double lat = 39.90403;
 		double lon = 116.407526; //需要查询经纬度，目前指向的是BeiJing
 		
-		/*获取中心点的geohash*/
+		获取中心点的geohash
 		String geohash = encode(lat, lon).substring(0, geohashLen);
 		
-		/*获取所有的矩形geohash， 一共是九个 ，包含中心点,打印顺序请参考图2*/
-		String[] result = getGeoHashExpand(geohash);
+		获取所有的矩形geohash， 一共是九个 ，包含中心点,打印顺序请参考图2
+		String[] result = getGeoHashExpand(geohash);*/
 		
-		
+		String test = "14365h7k9dcfesgujnmqp0r2twvyx8zb";
+		System.out.println(test.indexOf('0'));
 	}
 
 }
